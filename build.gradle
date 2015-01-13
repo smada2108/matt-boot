@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.1.RELEASE")
+    }
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+mainClassName = 'com.mladams.f1.F1Application'
+ 
+jar {
+    baseName = 'getting-started'
+    version =  '0.1.0'
+}
+ 
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+ 
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE")
+ 
+    testCompile("junit:junit")
+}
+ 
+ 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
+
+task debug(type: JavaExec, description: 'Start project in debug mode with listening port that can be connected to via IDE for remote debugging') {
+    debug = true
+    main = project.mainClassName
+    classpath = project.sourceSets.main.runtimeClasspath
+    args = run.args
+}
