@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" ng-app="ngAppGreetings">
 <head lang="en">
-    <meta charset="UTF-8"/>
-    <title>Greetings :)</title>
+    <div th:replace="fragments/header :: cssCommon">
+	</div>
+	<meta charset="UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="js/content.js"></script>
+    <title>F1 Boot App Index :)</title>
 </head>
 <body>
-<p th:text="${message}"></p>
+<div th:replace="fragments/header :: header">
+</div>
+<div class="container">
+    <br/>
+    <p th:text="#{selectInformationType}"></p>
+    <div class="dropdown">
+        <select class="form-control">
+           <option>Please select...</option>
+           <option value="drivers">Drivers</option>
+           <option value="tracks">Tracks</option>
+        </select>
+    </div>
+    <div ng-controller="Drivers">
+        <p>{{drivers.firstName}}&nbsp;{{drivers.surname}}</p>
+    </div>
+</div>
 </body>
 </html>
